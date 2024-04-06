@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Policies</title>
+    <style>
+        body{
+            background-color: #b2cbd4;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.99;
+        }
+        .ca{
+            margin-bottom: 1%;
+
+        }
+        label{
+            margin-right: 3%;
+        }
+        .pa{
+            margin-bottom: 2%;
+        }
+        .cap{
+            margin-bottom: 1%;
+        }
+        .pap{
+            margin-bottom: 1%;
+        }
+
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    <h1 align="center">POLICIES INFORMATION</h1>
+    <table border="2px soild " style="width: 100%;">
+    {% if policies %}
+    <tr>
+    <th>policie id</th> 
+    <th>policie name</th>
+    <th>description</th>
+    <th>area</th>
+    <th>premium</th>
+    <th>update</th>
+    <th>Delete</th>
+</tr>
+{% for i in policies %}
+    <tr>
+        
+        
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+         <td>{{i[4]}}</td>
+         <td> <a href="{{url_for('update_policies',cid=i[0])}}" style="text-decoration: none; color: black; ">UPDATE POLICIES</a></td>
+            <td><form action="{{url_for('deletepolicie')}}" method="POST">
+                <input type="hidden" name="pid" value="{{i[0]}}">
+                <button style="border: none;">DELETE POLICIE</button>
+            </form></td>
+           
+        </tr>
+        {% endfor %}
+    </table>
+    
+       
+        
+       
+        <h2 align="center">ADD POLICIES</h2>
+
+        <form method="POST">
+            <div class="ca">
+            <label style="padding-left: 5%;">Enter the coverage area of policy: </label>
+            <input type="text" placeholder="enter the coverage area of policy" name="area" style="width: 20%;"><br>
+        </div>
+        <div class="pa">
+            <label style="padding-left: 5%;">Enter the premium amount of the policie</label>
+            <input type="number" placeholder="enter the premium amount of the policy" name="amount" style="width: 18%;">
+        </div>
+        <label style="margin-left: 5%;">categories</label>
+
+                <select id="category_id" name="category_id" style="margin-left: 15%;">
+                    {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+
+                    {% endfor %}
+                </select><br>
+            <button style="margin-top: 2%; margin-left: 43%; background-color: yellow; border: none;">submit</button>
+        </form>
+        {% else %}
+        <h4 style="color: red;">No plocies are there</h4>
+        <h2 align="center">ADD POLCIES</h2>
+
+            <form method="POST">
+                <div class="cap">
+                <label style="margin-left: 5%;">Enter the coverage area of policy: </label>
+                <input type="text" placeholder="enter the coverage area of policy" name="area" style="width: 18%";><br>
+            </div>
+            <div class="pap">
+                <label style="margin-left: 5%;">Enter the premium amount of the policie</label>
+                <input type="number" placeholder="enter the premium amount of the policie" name="amount" style="width: 18%";><br>
+            </div>
+            <label style="margin-left: 5%;">categories</label>
+
+                <select id="category_id" name="category_id" style="margin-left: 15%;">
+                    {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+
+                    {% endfor %}
+                </select><br>
+            <button style="margin-top: 2%; margin-left: 43%; background-color: yellow; border: none;">submit</button>
+        </form>
+    {% endif %}
+</body>
+</html>

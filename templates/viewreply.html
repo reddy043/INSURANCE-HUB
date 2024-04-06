@@ -1,0 +1,73 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if view %}
+    {% for i in view %}
+    {{i[1]}}
+    {{i[2]}}
+    {{i[3]}}
+    {{i[4]}}
+    {% endfor %}
+    {% else %}
+    {% endif %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://wallpapercave.com/wp/wp9140810.png'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            background-color: #9da9b1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    <a href="{{url_for('customer_dashboard')}}">BACK</a>
+
+    <div class="content">
+        {% if view %}
+            {% for i in view %}
+                <p>{{i[1]}}</p>
+                <p>{{i[2]}}</p>
+                <p>{{i[3]}}</p>
+                <p>{{i[4]}}</p>
+            {% endfor %}
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

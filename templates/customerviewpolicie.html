@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Policies</title>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    {% if not otp_sent %}
+    <a href="{{url_for('customer_dashboard')}}">BACK</a>
+    <form method="POST" action="{{url_for('cusviewpolicie')}}">
+        <input type="email" name="email" placeholder="enter your email">
+        <button>submit the email</button>
+    </form>
+
+    <p> <b>After submitting the Email,you can get an otp enter that otp below then you can view your Policy Information</b></p>
+    {% else %}
+    <p>we sent an otp to your email</p>
+    <form method="POST" action="{{url_for('otp',otp=otp,email=email,otp_sent=otp_sent)}}">
+        <input type="otp" name="otp">
+        <button type="submit">submit the otp</button> 
+    </form>
+    {% endif %}
+
+  
+
+    {% if view %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Application ID</th>
+                <th>Customer Name</th>
+                
+                <th>Policy ID</th>
+                <th>Category ID</th>
+                <th>Application Date</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Average Income</th>
+                <th>Health</th>
+                <th>Health Problems</th>
+                <th>Email</th>
+                <th>Policy Name</th>
+                <th>Category Name</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in view %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[9] }}</td>
+                <td>{{ row[10] }}</td>
+                <td>{{ row[11] }}</td>
+                <td>{{ row[12] }}</td>
+              
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

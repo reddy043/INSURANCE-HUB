@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<style>
+    body{
+        background-image: url('https://512pixels.net/downloads/macos-wallpapers-6k/10-4-6k.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh;
+        background-position: center;
+        }
+     a {
+            text-decoration: none;
+            color: black; 
+        }
+        .policiesdashboard {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        .parent {
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+        
+        #first {
+            background-image: url('https://technoprobiz.com/wp-content/uploads/2021/12/customers-needs.jpeg');
+            background-size: contain ;   
+            background-repeat: no-repeat;    
+ }
+        #second {
+            background-image: url('https://i0.wp.com/images.blog.airmason.com/wp-content/uploads/2023/10/Understanding-the-Essence-Company-Policies-Definition.png?fit=940%2C788&ssl=1');
+            background-size: contain;
+        }
+        #third {
+            background-image: url('https://www.policybazaar.com/images/Life/pb-insurance-20.jpg');
+            background-size: contain;
+            
+          
+        }
+        #four {
+           background-image: url('https://www.agilecrm.com/blog/wp-content/uploads/2017/04/live-chat2-01.png');
+           background-size: contain ;
+        }
+        /* Add hover effect */
+        .policiesdashboard:hover {
+            background-color: lightgray; 
+        }
+        .policiesdashboard:hover a {
+            color: yellow;
+        }
+        button{
+            background-color:rgb(239, 239, 243);
+            text-align: right;
+         
+        }
+</style>
+<body>
+    <h1 align="center">Admin Dashboard</h1>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<button><a  href="{{url_for('alogout')}}">LOGOUT</a></button>
+
+<div class="parent">
+    <p>
+    <div id="first" class="policiesdashboard">
+            <a href="{{url_for('policiesdashboard')}}"><h1>Customers</h1></a>
+        </div>
+     <div id="second" class="policiesdashboard">
+
+    <a href="{{url_for('add_policies')}}"><h1>Policies</h1></a>
+    </div></p>
+    <div id="third" class="policiesdashboard">
+
+    <a href="{{url_for('addcategory')}}"><h1>Categories</h1></a>
+    </div>
+    <div id="four" class="policiesdashboard">
+
+    <a href="{{url_for('viewmessages')}}"><h1>Inquiries and questions.</h1></a>
+    </div>
+        
+        
+</div>
+</body>
+</html>

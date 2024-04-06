@@ -1,0 +1,178 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update customer policie</title>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    {% for i in view %}
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="{{i[1]}}" value="{{i[1]}}"><br><br>
+       
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="{{i[10]}}" value="{{i[10]}}"><br><br>
+        
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" placeholkder="{{i[5]}}" value="{{i[5]}}"><br><br>
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" placeholder="{{i[6]}}" value="{{i[6]}}"></textarea><br><br>
+        
+        <label for="income">Average Income:</label>
+        <input type="number" id="income" name="income" placeholder="{{i[7]}}" value="{{i[7]}}"><br><br>
+        
+        <label for="health">Health:</label>
+        <select id="health" name="health" value="{{i[8]}}">
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+        </select><br><br>
+        
+        <label for="health_problems">Health Problems:</label>
+        <input type="text" id="health_problems" name="health_problems" value="{{i[9]}}" placeholder="{{i[9]}}"><br><br>
+        
+        <label for="policy_id">Select Policy:</label>
+        <select id="policy_id" name="policy_id" value="{{i[2]}}">
+            {% for i in policies %}
+            <option value="{{i[0]}}">{{i[1]}}   {{i[2]}} {{i[4]}}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="date">Date:</label>
+        <input type="date" name="date" value="{{i[4]}}" placeholder="{{i[4]}}">
+        <button type="submit">Apply</button>
+    </form>
+    {% endfor %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update customer policy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select,
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div style="text-align: center;">
+                    {% for message in messages %}
+                        <b>{{ message }}</b><br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% for i in view %}
+        <form method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter name" value="{{i[1]}}"><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter email" value="{{i[10]}}"><br>
+            
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter phone" value="{{i[5]}}"><br>
+            
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" placeholder="Enter address">{{i[6]}}</textarea><br>
+            
+            <label for="income">Average Income:</label>
+            <input type="number" id="income" name="income" placeholder="Enter average income" value="{{i[7]}}"><br>
+            
+            <label for="health">Health:</label>
+            <select id="health" name="health">
+                <option value="Excellent" {% if i[8] == "Excellent" %} selected {% endif %}>Excellent</option>
+                <option value="Good" {% if i[8] == "Good" %} selected {% endif %}>Good</option>
+                <option value="Fair" {% if i[8] == "Fair" %} selected {% endif %}>Fair</option>
+                <option value="Poor" {% if i[8] == "Poor" %} selected {% endif %}>Poor</option>
+            </select><br>
+            
+            <label for="health_problems">Health Problems:</label>
+            <input type="text" id="health_problems" name="health_problems" placeholder="Enter health problems" value="{{i[9]}}"><br>
+            
+            <label for="policy_id">Select Policy:</label>
+            <select id="policy_id" name="policy_id">
+                {% for policy in policies %}
+                <option value="{{policy[0]}}">{{policy[1]}} - {{policy[2]}} - {{policy[4]}}</option>
+                {% endfor %}
+            </select><br>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="{{i[4]}}">
+            
+            <button type="submit">Apply</button>
+        </form>
+        {% endfor %}
+    </div>
+</body>
+</html>

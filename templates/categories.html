@@ -1,0 +1,156 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center><b>{{ message }}</b></center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    {% if categories %}
+    {% for i in categories %}
+    <p>{{i[1]}}</p>
+    <p>{{i[2]}}</p>
+    <form method="POST" action="{{url_for('deletecategory')}}">
+        <input type="hidden" name="caid" value="{{i[0]}}">
+        <button type="submit">delete</button>
+    </form>
+    <a href="{{url_for('update_category',cid=i[0])}}">update category</a>
+    {% endfor %}
+        {% else %}
+    <h6>ADD categories</h6>
+    <form method="POST">
+        <input type="text" name="name">
+        <input type="textname" name="description">
+        <button type="submit">submit</button>
+    </form>
+{% endif %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addcategories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #97c3ce;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }   
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+        }
+
+        h6 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-top: 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .back{
+            text-align: left;
+            background-color: #d1e85f;
+
+        }
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<center><b>{{ message }}</b></center>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<body>
+    <button class="back">
+    <a href="{{url_for('admindashboard')}}">BACK</a></button>
+    <div class="container">
+      
+
+        {% if categories %}
+        {% for i in categories %}
+        <p><strong>Name:</strong> {{i[1]}}</p>
+        <p><strong>Description:</strong> {{i[2]}}</p>
+        <form method="POST" action="{{url_for('deletecategory')}}">
+            <input type="hidden" name="caid" value="{{i[0]}}">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
+        <a href="{{url_for('update_category',cid=i[0])}}">Update category</a>
+       
+        {% endfor %}
+        {% endif %}
+        <h6>Add categories</h6>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Category Name">
+            <input type="text" name="description" placeholder="Category Description">
+            <button type="submit">Submit</button>
+        </form>    
+    </div>
+</body>
+</html>
